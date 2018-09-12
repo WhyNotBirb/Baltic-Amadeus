@@ -16,6 +16,7 @@ namespace BA_C3
         public string Lan_Label { get; set; }
         public int Children { get; set; }
         public int Free_space { get; set; }
+      
     }
 
 }

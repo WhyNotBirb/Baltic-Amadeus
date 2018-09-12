@@ -67,14 +67,20 @@ namespace BA_C3
                 }
 
             }
-
+            
             
             foreach (var item in MinMax)
             {
-                string a = item.Name.Substring(0, 3);
+                string a = item.Name;
+                a = a.Replace("\"","");
+                a = a.Substring(0, 3);
+                a = a.Replace(" ", "");
                 string b = item.Lan_Label.Substring(0, 3);
+                b = b.Replace("\"", "");
                 string c = item.Type_Label.Remove(0, 4);
-               c= c.Replace("iki", "-");
+                c = c.Replace("\"", "");
+
+                c = c.Replace("iki", "-");
                c= c.Replace("metų", "");
 
                 Console.WriteLine("{0}_{1}_{2}", a , b , c);
@@ -82,8 +88,10 @@ namespace BA_C3
             }
 
             List<string> languages = new List<string>();
+          
+            
             foreach (var item in groupsList) 
-            {
+            { 
                 if (!languages.Contains(item.Lan_Label))
                 {
                     languages.Add(item.Lan_Label);
@@ -92,6 +100,30 @@ namespace BA_C3
                 }
 
             }
+
+            foreach (var item in languages)
+            {        
+                    double children = 0;
+                    double free = 0;
+                foreach (var item2 in groupsList)
+                {
+                    
+                    
+                    if (item2.Lan_Label == item)
+                    {
+
+                        children += item2.Children;
+                        free += item2.Free_space;
+                    }
+                }
+                double percent=0;
+                percent = Math.Round(percent = 100 * free / (free + children), 2);
+               Console.WriteLine("{0} kalbos laisvos vietos procentais: {1}%", item, percent);
+
+            }
+
+            
+
 
 
 
